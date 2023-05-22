@@ -1,0 +1,3 @@
+{the=5, over=1, quick=1, lazy=1, street=1, jumps=1, brown=1, crossed=1, dog=2, fox=2}
+There are 10 unique words.
+The word: over was found 1 amount of times.
