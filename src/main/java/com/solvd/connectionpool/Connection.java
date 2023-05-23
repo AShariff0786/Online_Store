@@ -22,14 +22,14 @@ public class Connection {
         this.idNum = idNum;
     }
 
-    public void runConnection(){
+    public void runConnection(ConnectionPool connectionPool){
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 LOGGER.info("Custom Thread " + idNum + " has started.");
                 try {
                     Thread.sleep(5000);
-                    ConnectionPool.releaseConnection(Connection.this);
+                    connectionPool.releaseConnection(Connection.this);
                     LOGGER.info("Custom Thread " + idNum + " is complete.");
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

@@ -10,8 +10,8 @@ import java.util.List;
 public class ConnectionPool {
     private final static Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
     private static ConnectionPool connectionPool;
-    private static int numConnections;
-    private static List<Connection> connections = new ArrayList<>();
+    private int numConnections;
+    private List<Connection> connections = new ArrayList<>();
 
     private ConnectionPool(){}
     public static ConnectionPool getInstance(){
@@ -21,7 +21,7 @@ public class ConnectionPool {
         return connectionPool;
     }
 
-    public static int getNumConnections() {
+    public int getNumConnections() {
         return numConnections;
     }
 
@@ -44,19 +44,19 @@ public class ConnectionPool {
             connections.remove(0);
         }
         addCounter();
-        temp.runConnection();
+        temp.runConnection(connectionPool);
         return temp;
     }
-    public static void releaseConnection(Connection connection){
+    public void releaseConnection(Connection connection){
         connections.add(connection);
         if(numConnections > 0) {
             subtractCounter();
         }
     }
-    public static synchronized void addCounter(){
+    public synchronized void addCounter(){
         numConnections++;
     }
-    public static synchronized void subtractCounter(){
+    public synchronized void subtractCounter(){
         numConnections--;
     }
 }
